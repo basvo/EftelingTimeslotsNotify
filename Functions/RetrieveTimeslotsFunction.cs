@@ -11,9 +11,9 @@ namespace FunctionsEfteling
     public static class RetrieveTimeslotsFunction
     {
         [FunctionName("RetrieveTimeslotsFunction")]
-        public static async Task Run([TimerTrigger("0 */5 * * * *",
+        public static async Task Run([TimerTrigger("0 */5 * * * *"
             #if DEBUG
-                RunOnStartup= true
+                ,RunOnStartup= true
             #endif
             )]TimerInfo myTimer,
              [CosmosDB(
