@@ -6,6 +6,7 @@ using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Logging;
+using System.Globalization;
 
 namespace FunctionsEfteling
 {
@@ -47,7 +48,7 @@ namespace FunctionsEfteling
                     // Create a timeslot
                     Timeslot timeslot = new Timeslot()
                     {
-                        Date = timeslotRowDate == "Morgen" ? DateTime.Now.AddDays(1) : Convert.ToDateTime(timeslotRowDate),
+                        Date = timeslotRowDate == "Morgen" ? DateTime.Now.AddDays(1) : Convert.ToDateTime(timeslotRowDate, new CultureInfo("nl-NL")),
                         Window = timeslotRowWindow,
                         AvailableSpots = Convert.ToInt16(timeslotAvailable),
                         lastModified = DateTime.Now
