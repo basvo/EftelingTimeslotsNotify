@@ -48,7 +48,7 @@ namespace FunctionsEfteling
                     // Create a timeslot
                     Timeslot timeslot = new Timeslot()
                     {
-                        Date = timeslotRowDate == "Morgen" ? DateTime.Now.AddDays(1) : Convert.ToDateTime(timeslotRowDate, new CultureInfo("nl-NL")),
+                        Date = ParseDate(timeslotRowDate),
                         Window = timeslotRowWindow,
                         AvailableSpots = Convert.ToInt16(timeslotAvailable),
                         lastModified = DateTime.Now
@@ -64,6 +64,26 @@ namespace FunctionsEfteling
             }
 
             return timeslots;
+        }
+
+        private static DateTime ParseDate(string timeslotRowDate)
+        {
+            var parsedDate = DateTime.MinValue;
+
+            switch (timeslotRowDate.ToLower().Trim())
+            {
+                case "vandaag":
+                    parsedDate = DateTime.Now;
+                    break;
+                case "morgen":
+                    parsedDate = DateTime.Now.AddDays(1);
+                    break;
+                default:
+                    parsedDate = Convert.ToDateTime(timeslotRowDate, new CultureInfo("nl-NL"));
+                    break;
+            }
+
+            return parsedDate;
         }
     }
 }
